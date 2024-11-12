@@ -25,12 +25,17 @@ module.exports = {
       'LabeledStatement',
       'WithStatement',
     ],
+    'no-underscore-dangle': [
+      'error',
+      { 
+        allow: ['_maxStudentsSize', '_amount', '_currency', '_name', '_length', '_students'] 
+      }
+    ],
   },
-  overrides:[
+  overrides: [
     {
       files: ['*.js'],
       excludedFiles: 'babel.config.js',
     }
   ]
 };
- 
