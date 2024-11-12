@@ -39,7 +39,7 @@ export default class Pricing {
     return `${this._amount} ${this._currency.name} (${this._currency.code})`;
   }
 
-  static convertPrice(amount, conversionRate) {
+  static convertPrice(conversionRate, amount) {
     if (typeof amount !== 'number' || typeof conversionRate !== 'number') {
       throw new TypeError('Amount and conversion rate must be numbers');
     }
