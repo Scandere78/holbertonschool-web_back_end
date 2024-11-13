@@ -35,7 +35,8 @@ module.exports = {
           '_name',
           '_length',
           '_students',
-          '_code',  // Ajout de _code ici
+          '_code',
+          '_sqft'  // Ajout de _sqft ici
         ]
       }
     ],
