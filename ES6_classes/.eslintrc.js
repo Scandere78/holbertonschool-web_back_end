@@ -36,7 +36,8 @@ module.exports = {
           '_length',
           '_students',
           '_code',
-          '_sqft'  // Ajout de _sqft ici
+          '_sqft',
+          '_floors'
         ]
       }
     ],
