@@ -37,7 +37,9 @@ module.exports = {
           '_students',
           '_code',
           '_sqft',
-          '_floors'
+          '_floors',
+          '_size',
+          '_location'
         ]
       }
     ],
