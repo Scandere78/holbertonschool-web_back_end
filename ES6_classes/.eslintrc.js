@@ -39,7 +39,14 @@ module.exports = {
           '_sqft',
           '_floors',
           '_size',
-          '_location'
+          '_location',
+          '_year',
+          '_firstName',
+          '_lastName',
+          '_holbertonClass',
+          '_brand',
+          '_motor',
+          '_color'
         ]
       }
     ],
