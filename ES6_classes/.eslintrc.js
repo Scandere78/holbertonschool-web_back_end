@@ -28,7 +28,15 @@ module.exports = {
     'no-underscore-dangle': [
       'error',
       { 
-        allow: ['_maxStudentsSize', '_amount', '_currency', '_name', '_length', '_students'] 
+        allow: [
+          '_maxStudentsSize',
+          '_amount',
+          '_currency',
+          '_name',
+          '_length',
+          '_students',
+          '_code',  // Ajout de _code ici
+        ]
       }
     ],
   },
