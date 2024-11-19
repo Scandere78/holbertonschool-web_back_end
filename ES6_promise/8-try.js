@@ -1,14 +1,6 @@
-export default function cleanSet(set, startString) {
-  if (!startString || typeof startString !== 'string') {
-    return '';
+export default function divideFunction(numerator, denominator) {
+  if (denominator === 0) {
+    throw new Error('cannot divide by 0');
   }
-
-  const result = [];
-  for (const value of set) {
-    if (typeof value === 'string' && value.startsWith(startString)) {
-      result.push(value.slice(startString.length));
-    }
-  }
-
-  return result.join('-');
+  return numerator / denominator;
 }
