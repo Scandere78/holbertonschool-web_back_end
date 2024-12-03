@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-
-"""0. Basic annotations - add"""
+""" Module with a function that adds two floating-point numbers. """
 
 
 def add(a: float, b: float) -> float:
-
-    """A + B"""
+    """
+    Returns the sum of two floating-point numbers a and b.
+    """
     return a + b

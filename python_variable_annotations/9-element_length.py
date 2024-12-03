@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-from typing import Callable
+
+"""9. Let's duck type an iterable object"""
+
+from typing import Iterable, Sequence, List, Tuple
 
 
-# make_multiplier that returns a function to multiply a number by multiplier
-def make_multiplier(multiplier: float) -> Callable[[float], float]:
-    # return a function that multiplies its input by the multiplier
-    return lambda x: x * multiplier
+def element_length(lst: Iterable[Sequence]) -> List[Tuple[Sequence, int]]:
+    """Return a list of tuples with each element from lst and its length"""
+    return [(i, len(i)) for i in lst]
