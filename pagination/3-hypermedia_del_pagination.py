@@ -56,7 +56,7 @@ class Server:
         assert index is not None and isinstance(index, int) and \
             0 <= index < len(self.indexed_dataset()), \
             "index must be a valid index in the dataset"
-    
+
         indexed_dataset = self.indexed_dataset()
         data = []
         next_index = index
