@@ -82,3 +82,13 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     )
 
     return connection
+
+def close_db_connection(db: MySQLConnection) -> None:
+    """
+    Closes a MySQL database connection.
+
+    Args:
+        db (MySQLConnection): The database connection to close.
+    """
+    db.close()
+
