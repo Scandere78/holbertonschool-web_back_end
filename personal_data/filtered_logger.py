@@ -47,6 +47,13 @@ class RedactingFormatter(logging.Formatter):
 
 
 def get_logger() -> logging.Logger:
+    """
+    Creates and configures a logger to redact PII in logs.
+
+    Returns:
+        logging.Logger: Configured logger named 'user_data'
+    """
+
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     logger.propagate = False
