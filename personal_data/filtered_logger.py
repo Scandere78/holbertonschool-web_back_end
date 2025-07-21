@@ -83,7 +83,6 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return connection
 
 
-
 def main():
     """ Function that takes no arguments and returns nothing
     """
@@ -93,7 +92,10 @@ def main():
     logger = get_logger()
 
     for row in cursor:
-        row_str = f"name={row[0]}; email={row[1]}; phone={row[2]}; ssn={row[3]}; password={row[4]};"
+        row_str = (
+            f"name={row[0]}; email={row[1]};"
+            f"phone={row[2]}; ssn={row[3]}; password={row[4]};"
+            )
         logger.info(row_str)
 
     cursor.close()
