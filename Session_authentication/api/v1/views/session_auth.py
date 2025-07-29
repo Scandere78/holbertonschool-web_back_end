@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-""" Module for session authentication routes
-"""
+""" Module for session authentication routes """
 from flask import jsonify, request, abort
 from api.v1.views import app_views
 from models.user import User
-import os
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -26,25 +24,22 @@ def session_login():
     if not user.is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
 
-    # Auth importé ici pour éviter les imports circulaires
-    from api.v1.app import auth
+    from api.v1.app import auth  # éviter l'import circulaire
     session_id = auth.create_session(user.id)
 
     response = jsonify(user.to_json())
-    response.set_cookie(os.getenv("SESSION_NAME"), session_id)
-
+    response.set_cookie(
+        key=os.getenv("SESSION_NAME"),
+        value=session_id
+    )
     return response
 
 
-@app_views.route(
-    '/auth_session/logout', methods=['DELETE'],
-    strict_slashes=False
-)
-def logout():
-    """ Supprime la session de l'utilisateur """
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+def session_logout():
+    """ DELETE /auth_session/logout: Logout user (destroy session) """
     from api.v1.app import auth
 
     if not auth.destroy_session(request):
         abort(404)
-
     return jsonify({}), 200
