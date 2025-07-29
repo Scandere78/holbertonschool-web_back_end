@@ -25,7 +25,7 @@ else:
     auth = Auth()
 
 
-@@app.before_request
+@app.before_request
 def before_request_func():
     """ Function that filter each request."""
     if auth is None:
