@@ -7,6 +7,7 @@ from db import DB
 from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
+from typing import Optional
 
 
 def _hash_password(password: str) -> bytes:
@@ -55,6 +56,26 @@ class Auth:
                                   user.hashed_password.encode('utf-8'))
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) -> Optional[str]:
+        """
+        Create a session ID for the user identified by email.
+        Return the session ID as a string, or None if user not found.
+        """
+        try:
+            # 1. Trouver l'utilisateur par email
+            user = self._db.find_user_by(email=email)
+        except Exception:
+            return None
+
+        # 2. Générer un nouvel identifiant de session
+        session_id = _generate_uuid()
+
+        # 3. Mettre à jour l'utilisateur avec le nouvel ID de session
+        self._db.update_user(user.id, session_id=session_id)
+
+        # 4. Retourner l'ID de session
+        return session_id
 
 
 def _generate_uuid() -> str:
