@@ -95,6 +95,18 @@ class Auth:
         except NoResultFound:
             return None
 
+    def update_password(self, reset_token: str, password: str) -> None:
+        """ Updates a user's password based on a reset token.
+        """
+        try:
+            user = self._db.find_user_by(reset_token=reset_token)
+            hashed_password = _hash_password(password)
+            self._db.update_user(user.id, hashed_password=hashed_password,
+                                 reset_token=None)
+
+        except NoResultFound:
+            raise ValueError("Invalid reset token")
+
     def destroy_session(self, user_id: int) -> None:
         """ Destroys a user's session by setting their session ID to None.
         """
