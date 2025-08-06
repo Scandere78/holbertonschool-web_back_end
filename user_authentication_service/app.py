@@ -18,6 +18,8 @@ def home():
 
 @app.route("/users", methods=["POST"])
 def users():
+    """ Endpoint to register a new user.
+    """
     email = request.form.get("email")
     password = request.form.get("password")
 
