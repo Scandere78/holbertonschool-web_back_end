@@ -77,6 +77,42 @@ class Auth:
         # 4. Retourner l'ID de session
         return session_id
 
+    def get_user_from_session_id(self, session_id: str) -> Optional[User]:
+        """
+        Retrieve a user by their session_id.
+
+        Args:
+            session_id (str): The session ID to look up.
+
+        Returns:
+            User | None: The corresponding User object, or None if not found.
+        """
+        if session_id is None:
+            return None
+
+        try:
+            return self._db.find_user_by(session_id=session_id)
+        except NoResultFound:
+            return None
+    
+    def destroy_session(self, user_id: int) -> None:
+        """ Destroys a user's session by setting their session ID to None.
+        """
+        self._db.update_user(user_id, session_id=None)
+
+    def get_reset_password_token(self, email: str) -> str:
+        """ Generates a reset password token for a user with the given email.
+        """
+        token = _generate_uuid()
+
+        try:
+            user = self._db.find_user_by(email=email)
+            self._db.update_user(user.id, reset_token=token)
+            return token
+
+        except NoResultFound:
+            raise ValueError
+
 
 def _generate_uuid() -> str:
     """
