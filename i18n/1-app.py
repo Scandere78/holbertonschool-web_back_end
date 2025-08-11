@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Flask app with basic Babel setup."""
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_babel import Babel
 
 
@@ -20,7 +20,8 @@ babel = Babel(app)
 
 @app.route('/')
 def index():
-    return "<h1>Hello world</h1>"
+    """Render the home page with a welcome message."""
+    return render_template('1-index.html')
 
 
 if __name__ == "__main__":
