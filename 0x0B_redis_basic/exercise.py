@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-"""
-Module exercise - Cache class to store data in Redis
-"""
 import redis
 import uuid
 from typing import Union, Optional, Callable
@@ -9,10 +6,7 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
-    """
-    Decorator that counts how many times a method is called.
-    Stores the count in Redis using INCR.
-    """
+    """Decorator to count how many times a method is called"""
 
     @wraps(method)
     def wrapper(self, *args, **kwargs):
@@ -22,7 +16,6 @@ def count_calls(method: Callable) -> Callable:
         self._redis.incr(key)
         # call the original method
         return method(self, *args, **kwargs)
-
     return wrapper
 
 
@@ -34,6 +27,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """Store data in Redis and return the key"""
         key = str(uuid.uuid4())
@@ -45,18 +39,7 @@ class Cache:
         key: str,
         fn: Optional[Callable] = None
     ) -> Union[str, bytes, int, float, None]:
-        """
-        Retrieve data from Redis and optionally apply a conversion function.
-
-        Args:
-            key (str): The Redis key.
-            fn (Callable, optional): A function to apply on the data
-            before returning it.
-
-        Returns:
-            The retrieved data, converted if fn is provided, else bytes.
-            Returns None if the key does not exist.
-        """
+        """Retrieve data from Redis and optionally"""
         data = self._redis.get(key)
         if data is None:
             return None
@@ -65,25 +48,9 @@ class Cache:
         return data
 
     def get_str(self, key: str) -> Optional[str]:
-        """
-        Retrieve a string value from Redis.
-
-        Args:
-            key (str): The Redis key.
-
-        Returns:
-            str if key exists, else None.
-        """
+        """Retrieve a string value from Redis"""
         return self.get(key, fn=lambda d: d.decode("utf-8"))
 
     def get_int(self, key: str) -> Optional[int]:
-        """
-        Retrieve an integer value from Redis.
-
-        Args:
-            key (str): The Redis key.
-
-        Returns:
-            int if key exists, else None.
-        """
+        """Retrieve an integer value from Redis"""
         return self.get(key, fn=int)
