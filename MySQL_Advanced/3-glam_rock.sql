@@ -1,12 +1,6 @@
--- Création de la table
-CREATE TABLE glam_rock (
-    band_name VARCHAR(255),
-    lifespan INT
-);
+-- Script that lists all bands with Glam rock AS their main style, ranked by their longevity
 
--- Insertion des données
-INSERT INTO glam_rock (band_name, lifespan)
-VALUES ('Alice Cooper', 60);
-
--- Requête finale
-SELECT band_name, lifespan FROM glam_rock;
+SELECT  band_name,(ifnull(split,2020) - ifnull(formed,0)) lifespan
+FROM metal_bands
+WHERE style LIKE '%Glam rock%'
+ORDER BY lifespan DESC
