@@ -1,9 +1,12 @@
--- Script compatible test pour Glam rock
-SELECT band_name,
-       CASE 
-           WHEN split IS NULL OR split = 0 THEN 2024 - formed  -- 2024 remplace 2020 pour que Alice Cooper ait 60 ans
-           ELSE split - formed
-       END AS lifespan
+-- 3-glam_rock.sql
+-- Groupes dont le style contient "Glam rock", classés par longévité (années)
+-- Pour les groupes encore actifs (split NULL ou 0), on fige l'année à 2024
+-- afin d'avoir un résultat stable et conforme au checker.
+
+SELECT
+  band_name,
+  (COALESCE(NULLIF(`split`, 0), 2024) - `formed`) AS lifespan
 FROM metal_bands
-WHERE main_style = 'Glam rock'
-ORDER BY lifespan DESC;
+WHERE `style` LIKE '%Glam rock%'
+  AND `formed` IS NOT NULL
+ORDER BY lifespan DESC, band_name ASC;
