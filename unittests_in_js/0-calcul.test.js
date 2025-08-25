@@ -18,4 +18,8 @@ describe('calculateNumber', function () {
   it('should round both correctly (1.5 + 3.7 = 6)', function () {
     assert.strictEqual(calculateNumber(1.5, 3.7), 6);
   });
+
+  it('should round both numbers when both need rounding', function () {
+    assert.strictEqual(calculateNumber(1.4, 2.6), 4);
+  });
 });
