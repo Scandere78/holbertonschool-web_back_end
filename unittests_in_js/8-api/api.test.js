@@ -1,9 +1,9 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('./api'); // ton app Express
+const app = require('./api');
+const { expect } = chai;
 
 chai.use(chaiHttp);
-const { expect } = chai;
 
 describe('Index page', () => {
   it('should return correct status code and result', (done) => {
