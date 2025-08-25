@@ -1,11 +1,19 @@
-const request = require('supertest');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 const app = require('./api');
+const { expect } = chai;
+
+chai.use(chaiHttp);
 
 describe('Index page', () => {
   it('should return correct status code and result', (done) => {
-    request(app)
+    chai.request(app)
       .get('/')
-      .expect(200)
-      .expect('Welcome to the payment system', done);
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.text).to.equal('Welcome to the payment system');
+        done();
+      });
   });
 });
