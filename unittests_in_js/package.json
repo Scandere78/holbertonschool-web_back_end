@@ -1,0 +1,15 @@
+{
+  "name": "unittests_in_js",
+  "version": "1.0.0",
+  "description": "📌 Node.js Testing Project\r 📖 Description",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.8.2"
+  }
+}
