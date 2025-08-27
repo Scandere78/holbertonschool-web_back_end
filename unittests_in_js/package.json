@@ -1,17 +1,14 @@
 {
-  "name": "unittests_in_js",
+  "name": "task_0",
   "version": "1.0.0",
-  "description": "📌 Node.js Testing Project\r 📖 Description",
-  "main": "index.js",
+  "description": "",
+  "main": "0-calcul.js",
   "scripts": {
     "test": "mocha"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^6.0.1",
-    "mocha": "^10.8.2",
-    "sinon": "^21.0.0"
+    "mocha": "^11.0.1"
   }
 }
